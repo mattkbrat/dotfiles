@@ -1,1 +1,10 @@
+" commit dotfiles files after updating with chezmoi
 autocmd BufWritePost ~/.local/share/chezmoi/* ! chezmoi apply --source-path "%"
+set number             " Enable line numbering
+
+" https://vi.stackexchange.com/a/38037 -- Relative line numbering in normal mode, absolute line numbering in insert mode.
+augroup numbertoggle   " Toggles relativenumber on and off based on mode
+    autocmd!
+    autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+    autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+augroup END
