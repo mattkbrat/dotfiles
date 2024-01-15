@@ -17,8 +17,11 @@ call plug#begin()
 
 " Make sure you use single quotes
 
+" Lua functions
+Plug 'nvim-lua/plenary.nvim'
+
 " Chezmoi formatting
-Plug 'https://github.com/alker0/chezmoi.vim.git'
+Plug 'https://github.com/jbmorice/chezmoi.nvim.git'
 
 " Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
 Plug 'junegunn/vim-easy-align'
