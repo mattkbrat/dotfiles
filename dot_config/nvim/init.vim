@@ -20,6 +20,14 @@ call plug#begin()
 " Lua functions
 Plug 'nvim-lua/plenary.nvim'
 
+" Telescope for fuzzy filtering lists
+Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.5' }
+" fzf-native for improving sorting performance
+Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
+
+" Treesitter
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+
 " Chezmoi formatting
 Plug 'https://github.com/jbmorice/chezmoi.nvim.git'
 
