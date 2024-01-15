@@ -142,3 +142,4 @@ PERL_MM_OPT="INSTALL_BASE=$HOME/perl5"; export PERL_MM_OPT;
 
 # home/.apps folder
 PATH="$HOME/.apps${PATH:+:${PATH}}"; export PATH;
+
