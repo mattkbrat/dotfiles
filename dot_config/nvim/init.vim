@@ -17,6 +17,9 @@ call plug#begin()
 
 " Make sure you use single quotes
 
+" Chezmoi formatting
+Plug 'https://github.com/alker0/chezmoi.vim.git'
+
 " Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
 Plug 'junegunn/vim-easy-align'
 
