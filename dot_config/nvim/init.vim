@@ -1,5 +1,5 @@
 " Load Lua
-lua require('init')
+" lua require('init')
 
 " Link .vimrc
 
