@@ -1,3 +1,6 @@
+" Load Lua
+lua require('init')
+
 " Link .vimrc
 
 set runtimepath^=~/.vim runtimepath+=~/.vim/after
@@ -55,6 +58,14 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 
 " allows you to easily manage external editor tooling such as LSP servers, DAP servers, linters, and formatters through a single interface
 Plug 'williamboman/mason.nvim'
+
+" nvim-cmp
+Plug 'neovim/nvim-lspconfig'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-cmdline'
+Plug 'hrsh7th/nvim-cmp'
 
 " Theme
 Plug 'tanvirtin/monokai.nvim'
