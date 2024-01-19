@@ -56,6 +56,9 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 " allows you to easily manage external editor tooling such as LSP servers, DAP servers, linters, and formatters through a single interface
 Plug 'williamboman/mason.nvim'
 
+" Theme
+Plug 'tanvirtin/monokai.nvim'
+
 " Initialize plugin system
 " - Automatically executes `filetype plugin indent on` and `syntax enable`.
 call plug#end()
