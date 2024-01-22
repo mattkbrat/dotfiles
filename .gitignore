@@ -1,1 +1,5 @@
 *.swp  # Do not commit vim swap files
+*.json #ignore lockfiles
+
+# editor plugins
+.history
