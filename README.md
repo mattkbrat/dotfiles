@@ -15,6 +15,14 @@ tags:
 
 ## Apps
 
+### Gitwatch
+
+Auto-commit dotfile changes
+
+[gitwatch](https://github.com/gitwatch/gitwatch)
+
+- `gitwatch /home/matt/.local/share/chezmoi`
+
 ### Rofi
 
 _A window switcher, Application launcher and dmenu replacement._
@@ -30,6 +38,7 @@ _hyperextensible Vim-based text editor_
 [nvim](https://github.com/neovim/neovim/blob/master/INSTALL.md)
 
 - [lazyvim](https://github.com/LazyVim/LazyVim)
+- [lazygit](https://github.com/jesseduffield/lazygit#features)
 
 ### Kitty
 
