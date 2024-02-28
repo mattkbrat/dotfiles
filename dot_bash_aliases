@@ -1,2 +1,2 @@
-alias nvim="~/nvim-linux64/bin/nvim"
-alias vim="nvim"
+alias yays="yay -Slq | fzf --preview 'yay -Si {}' --height=97% --layout=reverse --bind 'enter:execute(yay -Si {} | less)'"
+alias n="nvim"
