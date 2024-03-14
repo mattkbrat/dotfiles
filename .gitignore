@@ -5,3 +5,5 @@
 
 # editor plugins
 .history
+
+node_modules
