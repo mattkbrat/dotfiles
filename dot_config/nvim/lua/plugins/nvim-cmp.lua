@@ -36,6 +36,8 @@ M.config = function()
       { name = "nvim_lsp" },
       { name = "nvim_lua" },
       { name = "luasnip" }, -- For luasnip users.
+      { name = "tsserver" },
+
       -- { name = "orgmode" },
     }, {
       { name = "buffer" },
