@@ -6,11 +6,19 @@ if status is-interactive
     alias nvim="$HOME/.apps/nvim.appimage"
     alias q="exit"
     alias ls="eza"
-    sh nvm
+    alias c="clear"
+    alias e="nnn"
+    alias fd="fdfind"
+    bass source ~/.nvm/nvm.sh --no-use ';' nvm $argv
+
+    nvm
     set MANPAGER "sh -c 'col -bx | bat -l man -p'"
     set fish_user_paths /usr/local/bin $fish_user_paths
     set fish_user_paths $HOME/.apps $fish_user_paths
     set GPG_TTY $(tty)
+
+    set -x GOPATH /usr/local/go
+    set -x PATH $PATH $GOPATH/bin
 
 
     function !!
