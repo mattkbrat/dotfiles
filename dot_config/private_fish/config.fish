@@ -16,7 +16,7 @@ if status is-interactive
     set fish_user_paths /usr/local/bin $fish_user_paths
     set fish_user_paths $HOME/.apps $fish_user_paths
     set GPG_TTY $(tty)
-
+    set NNN_PLUG 'f:finder;o:fzopen;p:mocq;d:diffs;t:nmount;v:imgview'
     set -x GOPATH /usr/local/go
     set -x PATH $PATH $GOPATH/bin
 
