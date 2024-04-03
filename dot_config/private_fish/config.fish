@@ -9,6 +9,7 @@ if status is-interactive
     alias c="clear"
     alias e="nnn"
     alias fd="fdfind"
+    alias n="nvim"
     bass source ~/.nvm/nvm.sh --no-use ';' nvm $argv
 
     nvm
@@ -36,3 +37,11 @@ if status is-interactive
 
     # Commands to run in interactive sessions can go here
 end
+
+# bun
+set --export BUN_INSTALL "$HOME/.bun"
+set --export PATH $BUN_INSTALL/bin $PATH
+
+# bun
+set --export BUN_INSTALL "$HOME/.bun"
+set --export PATH $BUN_INSTALL/bin $PATH

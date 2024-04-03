@@ -148,6 +148,11 @@ export PERL_MM_OPT
 PATH="$HOME/.apps${PATH:+:${PATH}}"
 export PATH
 
+# Deno
+
+export DENO_INSTALL="$HOME/.deno"
+export PATH="$DENO_INSTALL/bin:$PATH"
+
 # launch spotify-tui with spotifyd (if not already running)
 spotify() {
 	if ! pgrep -c "spotifyd" >/dev/null; then
@@ -169,3 +174,5 @@ timer() {
 }
 
 export GPG_TTY="tty"
+
+
