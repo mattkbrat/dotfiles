@@ -153,6 +153,10 @@ export PATH
 export DENO_INSTALL="$HOME/.deno"
 export PATH="$DENO_INSTALL/bin:$PATH"
 
+# guix
+GUIX_PROFILE="/home/matt/.config/guix/current"
+. "$GUIX_PROFILE/etc/profile"
+
 # launch spotify-tui with spotifyd (if not already running)
 spotify() {
 	if ! pgrep -c "spotifyd" >/dev/null; then

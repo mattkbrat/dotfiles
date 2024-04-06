@@ -8,7 +8,7 @@ if status is-interactive
     alias ls="eza"
     alias c="clear"
     alias e="nnn"
-    alias fd="fdfind"
+    # alias fd="fd-find"
     alias n="nvim"
     bass source ~/.nvm/nvm.sh --no-use ';' nvm $argv
 
@@ -19,8 +19,13 @@ if status is-interactive
     set GPG_TTY $(tty)
     set NNN_PLUG 'f:finder;o:fzopen;p:mocq;d:diffs;t:nmount;v:imgview'
     set -x GOPATH /usr/local/go
+
     set -x PATH $PATH $GOPATH/bin
 
+    set GUIX_PROFILE "$HOME/.guix-profile"
+    set GUIX_LOCPATH "$HOME/.guix-profile/lib/locale"
+
+    set -x PATH $PATH $GUIX_LOCPATH
 
     function !!
         set var (history | head -n 1)
