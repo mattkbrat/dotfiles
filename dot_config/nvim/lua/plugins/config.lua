@@ -90,107 +90,12 @@ return {
       ---@type lspconfig.options
       servers = {
         -- pyright will be automatically installed with mason and loaded with lspconfig
-        pyright = {},
+        -- pyright = {},
+        tsserver = {},
       },
     },
   },
 
-  -- add tsserver and setup with typescript.nvim instead of lspconfig
-  {
-    "neovim/nvim-lspconfig",
-    dependencies = {
-      "jose-elias-alvarez/typescript.nvim",
-      init = function()
-        require("lazyvim.util").lsp.on_attach(function(_, buffer)
-          -- stylua: ignore
-          vim.keymap.set( "n", "<leader>co", "TypescriptOrganizeImports", { buffer = buffer, desc = "Organize Imports" })
-          vim.keymap.set("n", "<leader>cR", "TypescriptRenameFile", { desc = "Rename File", buffer = buffer })
-        end)
-      end,
-    },
-opts = {
-  -- options for vim.diagnostic.config()
-  ---@type vim.diagnostic.Opts
-  diagnostics = {
-    underline = true,
-    update_in_insert = false,
-    virtual_text = {
-      spacing = 4,
-      source = "if_many",
-      prefix = "●",
-      -- this will set set the prefix to a function that returns the diagnostics icon based on the severity
-      -- this only works on a recent 0.10.0 build. Will be set to "●" when not supported
-      -- prefix = "icons",
-    },
-    severity_sort = true,
-    signs = {
-      text = {
-        [vim.diagnostic.severity.ERROR] = LazyVim.config.icons.diagnostics.Error,
-        [vim.diagnostic.severity.WARN] = LazyVim.config.icons.diagnostics.Warn,
-        [vim.diagnostic.severity.HINT] = LazyVim.config.icons.diagnostics.Hint,
-        [vim.diagnostic.severity.INFO] = LazyVim.config.icons.diagnostics.Info,
-      },
-    },
-  },
-  -- Enable this to enable the builtin LSP inlay hints on Neovim >= 0.10.0
-  -- Be aware that you also will need to properly configure your LSP server to
-  -- provide the inlay hints.
-  inlay_hints = {
-    enabled = true,
-  },
-  -- Enable this to enable the builtin LSP code lenses on Neovim >= 0.10.0
-  -- Be aware that you also will need to properly configure your LSP server to
-  -- provide the code lenses.
-  codelens = {
-    enabled = true,
-  },
-  -- add any global capabilities here
-  capabilities = {},
-  -- options for vim.lsp.buf.format
-  -- `bufnr` and `filter` is handled by the LazyVim formatter,
-  -- but can be also overridden when specified
-  format = {
-    formatting_options = nil,
-    timeout_ms = nil,
-  },
-  -- LSP Server Settings
-  ---@type lspconfig.options
-  servers = {
-    lua_ls = {
-      -- mason = false, -- set to false if you don't want this server to be installed with mason
-      -- Use this to add any additional keymaps
-      -- for specific lsp servers
-      ---@type LazyKeysSpec[]
-      -- keys = {},
-      settings = {
-        Lua = {
-          workspace = {
-            checkThirdParty = false,
-          },
-          codeLens = {
-            enable = true,
-          },
-          completion = {
-            callSnippet = "Replace",
-          },
-        },
-      },
-    },
-  },
-  -- you can do any additional lsp server setup here
-  -- return true if you don't want this server to be setup with lspconfig
-  ---@type table<string, fun(server:string, opts:_.lspconfig.options):boolean?>
-  setup = {
-    -- example to setup with typescript.nvim
-    -- tsserver = function(_, opts)
-    --   require("typescript").setup({ server = opts })
-    --   return true
-    -- end,
-    -- Specify * to use this function as a fallback for any server
-    -- ["*"] = function(server, opts) end,
-  },
-}
-  },
 
   -- for typescript, LazyVim also includes extra specs to properly setup lspconfig,
   -- treesitter, mason and typescript.nvim. So instead of the above, you can use:
@@ -253,6 +158,13 @@ opts = {
     end,
   },
 
+  -- disable neo-tree
+  {
+      "nvim-neo-tree/neo-tree.nvim",
+      enabled = false
+  },
+
+
   -- use mini.starter instead of alpha
   { import = "lazyvim.plugins.extras.ui.mini-starter" },
 
@@ -271,69 +183,56 @@ opts = {
     },
   },
 
-  {
-    "pmizio/typescript-tools.nvim",
-    dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
-    opts = {
-      settings = {
-    jsx_close_tag = {
-        enable = true,
-        filetypes = { "javascriptreact", "typescriptreact" },
-    },
-        code_lens = "all"
-      }
-    },
-  },
 
   -- Use <tab> for completion and snippets (supertab)
   -- first: disable default <tab> and <s-tab> behavior in LuaSnip
-  {
-    "L3MON4D3/LuaSnip",
-    keys = function()
-      return {}
-    end,
-  },
-  -- then: setup supertab in cmp
-  {
-    "hrsh7th/nvim-cmp",
-    dependencies = {
-      "hrsh7th/cmp-emoji",
-    },
-    ---@param opts cmp.ConfigSchema
-    opts = function(_, opts)
-      local has_words_before = function()
-        unpack = unpack or table.unpack
-        local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-        return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
-      end
+  -- {
+  --   "L3MON4D3/LuaSnip",
+  --   keys = function()
+  --     return {}
+  --   end,
+  -- },
+  -- -- then: setup supertab in cmp
+  -- {
+  --   "hrsh7th/nvim-cmp",
+  --   dependencies = {
+  --     "hrsh7th/cmp-emoji",
+  --   },
+  --   ---@param opts cmp.ConfigSchema
+  --   opts = function(_, opts)
+  --     local has_words_before = function()
+  --       unpack = unpack or table.unpack
+  --       local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+  --       return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+  --     end
 
-      local luasnip = require("luasnip")
-      local cmp = require("cmp")
+  --     local luasnip = require("luasnip")
+  --     local cmp = require("cmp")
 
-      opts.mapping = vim.tbl_extend("force", opts.mapping, {
-        ["<Tab>"] = cmp.mapping(function(fallback)
-          if cmp.visible() then
-            cmp.select_next_item()
-            -- You could replace the expand_or_jumpable() calls with expand_or_locally_jumpable()
-            -- this way you will only jump inside the snippet region
-          elseif luasnip.expand_or_jumpable() then
-            luasnip.expand_or_jump()
-          elseif has_words_before() then
-            cmp.complete()
-          else
-            fallback()
-          end
-        end, { "i", "s" }),
-        ["<S-Tab>"] = cmp.mapping(function(fallback)
-          if cmp.visible() then
-            cmp.select_prev_item()
-          elseif luasnip.jumpable(-1) then
-            luasnip.jump(-1)
-          else
-            fallback()
-          end
-        end, { "i", "s" }),
-      })
-    end,
-  },
+  --     opts.mapping = vim.tbl_extend("force", opts.mapping, {
+  --       ["<Tab>"] = cmp.mapping(function(fallback)
+  --         if cmp.visible() then
+  --           cmp.select_next_item()
+  --           -- You could replace the expand_or_jumpable() calls with expand_or_locally_jumpable()
+  --           -- this way you will only jump inside the snippet region
+  --         elseif luasnip.expand_or_jumpable() then
+  --           luasnip.expand_or_jump()
+  --         elseif has_words_before() then
+  --           cmp.complete()
+  --         else
+  --           fallback()
+  --         end
+  --       end, { "i", "s" }),
+  --       ["<S-Tab>"] = cmp.mapping(function(fallback)
+  --         if cmp.visible() then
+  --           cmp.select_prev_item()
+  --         elseif luasnip.jumpable(-1) then
+  --           luasnip.jump(-1)
+  --         else
+  --           fallback()
+  --         end
+  --       end, { "i", "s" }),
+  --     })
+  --   end,
+  -- },
 }
