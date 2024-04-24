@@ -50,8 +50,11 @@ URxvt.depth: 24
 URxvt.iso14755: false
 
 ! Font
-URxvt.font:     xft:CaskaydiaMono NF:style=Bold
-URxvt.boldFont: xft:CaskaydiaMono NF:style=Regular
+!URxvt.font:     xft:CaskaydiaMono NF:style=Bold
+!URxvt.boldFont: xft:CaskaydiaMono NF:style=Regular
+
+URxvt.font:     xft:Iosevka\ NF:style=Regular
+URxvt.boldFont: xft:Iosevka\ NF:style=Bold,font-size=16
 
 !! perl scripts
 URxvt.perl-ext-common: font-size
