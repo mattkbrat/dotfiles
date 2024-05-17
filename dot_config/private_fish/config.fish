@@ -8,8 +8,8 @@ if status is-interactive
     alias ls="eza"
     alias c="clear"
     alias e="nnn"
-    # alias fd="fd-find"
     alias n="nvim"
+    alias fd="fdfind"
     bass source ~/.nvm/nvm.sh --no-use ';' nvm $argv
 
     nvm
@@ -51,9 +51,15 @@ set --export PATH $BUN_INSTALL/bin $PATH
 set --export BUN_INSTALL "$HOME/.bun"
 set --export PATH $BUN_INSTALL/bin $PATH
 
+set --export FLUTTER_INSTALL "$HOME/flutter"
+set --export PATH $FLUTTER_INSTALL/bin $PATH
+
+set --export ANDROID_STUDIO_INSTALL /usr/local/android-studio
+set --export PATH $ANDROID_STUDIO_INSTALL/bin $PATH
+
 # pnpm
 set -gx PNPM_HOME "/home/matt/.local/share/pnpm"
 if not string match -q -- $PNPM_HOME $PATH
-  set -gx PATH "$PNPM_HOME" $PATH
+    set -gx PATH "$PNPM_HOME" $PATH
 end
 # pnpm end
