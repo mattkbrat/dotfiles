@@ -47,3 +47,15 @@ _The fast, feature-rich, GPU based terminal emulator_
 [kitty](https://sw.kovidgoyal.net/kitty/)
 
 - [asdf](https://asdf-vm.com/guide/getting-started.html)
+
+## zsh
+
+### antigen
+
+```bash
+curl -L git.io/antigen > antigen.zsh
+```
+
+#### Plugins
+
+- zsh-nvm: `antigen bundle lukechilds/zsh-nvm`
