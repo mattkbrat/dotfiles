@@ -7,3 +7,5 @@
 .history
 
 node_modules
+dot_config/helix/themes/catpuccin/assets
+dot_config/helix/themes/catpuccin/dot_git
