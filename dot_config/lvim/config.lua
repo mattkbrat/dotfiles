@@ -20,3 +20,5 @@ lvim.plugins = {
 }
 
 lvim.keys.normal_mode["-"] = ":Oil<CR>"
+lvim.keys.normal_mode["<leader>|"] = ":vsplit<CR>"
+lvim.keys.normal_mode["<leader>-"] = ":split<CR>"
