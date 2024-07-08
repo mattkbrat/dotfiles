@@ -12,10 +12,11 @@ fi
 
 path+=$HOME/.local/share/pnpm/
 path+=$HOME/.apps/
-path+=$HOME/.local/bin/
+path+=$HOME/.local/bin 
+path+=$HOME/.scripts/
 
 # Set the directory we want to store zinit and plugins
-export ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+export ZINIT_HOME="$XDG_DATA_HOME:-$HOME/.local/share}/zinit/zinit.git"
 export PNPM_HOME="$HOME/.local/share/pnpm"
 
 # Download Zinit, if it's not there yet
@@ -111,6 +112,7 @@ alias tree='eza --tree $eza_params'
 eval "$(zoxide init --cmd cd zsh)"
 
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=off
+
 
 # pnpm
 case ":$PATH:" in
