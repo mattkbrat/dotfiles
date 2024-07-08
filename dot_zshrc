@@ -12,10 +12,11 @@ fi
 
 path+=$HOME/.local/share/pnpm/
 path+=$HOME/.apps/
+path+=$HOME/.local/bin/
 
 # Set the directory we want to store zinit and plugins
-ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
-PNPM_HOME="${HOME}/.local/share/pnpm"
+export ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+export PNPM_HOME="$HOME/.local/share/pnpm"
 
 # Download Zinit, if it's not there yet
 if [ ! -d "$ZINIT_HOME" ]; then
@@ -24,7 +25,7 @@ if [ ! -d "$ZINIT_HOME" ]; then
 fi
 
 # Source/Load zinit
-source "${ZINIT_HOME}/zinit.zsh"
+source "$ZINIT_HOME/zinit.zsh"
 
 # Add in Powerlevel10k
 zinit ice depth=1; zinit light romkatv/powerlevel10k
@@ -110,3 +111,10 @@ alias tree='eza --tree $eza_params'
 eval "$(zoxide init --cmd cd zsh)"
 
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=off
+
+# pnpm
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
