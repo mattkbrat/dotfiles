@@ -16,3 +16,6 @@ style = "Italic"
 [font.normal]
 family = "Iosevka Nerd Font Mono"
 style = "Regular"
+
+[window]
+opacity = 0.95
