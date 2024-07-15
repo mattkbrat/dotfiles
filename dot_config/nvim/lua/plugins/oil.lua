@@ -1,41 +1,64 @@
--- local M = {
---   "stevearc/oil.nvim",
---   dependencies = { "nvim-tree/nvim-web-devicons" },
--- }
---
--- M.config = function()
---   local oil = require("oil")
---   local actions = require("oil.actions")
---   oil.setup({
---     keymaps = {
---       ["g?"] = actions.show_help.callback(),
---       ["<CR>"] = actions.select.callback(),
---       ["<C-s>"] = actions.select_vsplit.callback(),
---       ["<C-h>"] = actions.select_split.callback(),
---       ["<C-t>"] = actions.select_tab.callback(),
---       ["<C-p>"] = actions.preview.callback(),
---       ["<C-c>"] = actions.close.callback(),
---       ["<C-l>"] = actions.refresh.callback(),
---       ["-"] = actions.parent.callback(),
---       ["_"] = actions.open_cwd.callback(),
---       ["`"] = actions.cd.callback(),
---       ["~"] = actions.tcd.callback(),
---       ["gs"] = actions.change_sort.callback(),
---       ["gx"] = actions.open_external.callback(),
---       ["g."] = actions.toggle_hidden.callback(),
---       ["g\\"] = actions.toggle_trash.callback(),
---     },
---   })
--- end
--- return M
-
 return {
   "stevearc/oil.nvim",
-  opts = {},
-  enabled = true,
-  -- Optional dependencies
-  keys = { { "<leader>e", "<cmd>Oil<cr>", desc = "File Explorer" } },
-  dependencies = { "nvim-tree/nvim-web-devicons" },
   cmd = "Oil",
-  event = { "VimEnter */*,.*", "BufNew */*,.*" },
+  dependencies = {
+    {
+      "AstroNvim/astrocore",
+      opts = {
+        mappings = {
+          n = {
+            ["-"] = { function() require("oil").open() end, desc = "Open folder in Oil" },
+          },
+        },
+        autocmds = {
+          oil_settings = {
+            {
+              event = "FileType",
+              desc = "Disable view saving for oil buffers",
+              pattern = "oil",
+              callback = function(args) vim.b[args.buf].view_activated = false end,
+            },
+            {
+              event = "User",
+              pattern = "OilActionsPost",
+              desc = "Close buffers when files are deleted in Oil",
+              callback = function(args)
+                if args.data.err then return end
+                for _, action in ipairs(args.data.actions) do
+                  if action.type == "delete" then
+                    local _, path = require("oil.util").parse_url(action.url)
+                    local bufnr = vim.fn.bufnr(path)
+                    if bufnr ~= -1 then require("astrocore.buffer").wipe(bufnr, true) end
+                  end
+                end
+              end,
+            },
+          },
+        },
+      },
+    },
+    {
+      "rebelot/heirline.nvim",
+      optional = true,
+      dependencies = { "AstroNvim/astroui", opts = { status = { winbar = { enabled = { filetype = { "^oil$" } } } } } },
+      opts = function(_, opts)
+        if opts.winbar then
+          local status = require "astroui.status"
+          table.insert(opts.winbar, 1, {
+            condition = function(self) return status.condition.buffer_matches({ filetype = "^oil$" }, self.bufnr) end,
+            status.component.separated_path {
+              padding = { left = 2 },
+              max_depth = false,
+              suffix = false,
+              path_func = function(self) return require("oil").get_current_dir(self.bufnr) end,
+            },
+          })
+        end
+      end,
+    },
+  },
+  opts = function()
+    local get_icon = require("astroui").get_icon
+    return { columns = { { "icon", default_file = get_icon "DefaultFile", directory = get_icon "FolderClosed" } } }
+  end,
 }

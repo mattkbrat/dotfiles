@@ -1,42 +1,60 @@
 return {
   "epwalsh/obsidian.nvim",
-  version = "*", -- recommended, use latest release instead of latest commit
-  lazy = true,
-  ft = "markdown",
-  -- Replace the above line with this if you only want to load obsidian.nvim for markdown files in your vault:
-  -- event = {
-  --   -- If you want to use the home shortcut '~' here you need to call 'vim.fn.expand'.
-  --   -- E.g. "BufReadPre " .. vim.fn.expand "~" .. "/my-vault/**.md"
-  --   "BufReadPre path/to/my-vault/**.md",
-  --   "BufNewFile path/to/my-vault/**.md",
-  -- },
+  -- the obsidian vault in this default config  ~/obsidian-vault
+  -- If you want to use the home shortcut '~' here you need to call 'vim.fn.expand':
+  -- event = { "bufreadpre " .. vim.fn.expand "~" .. "/my-vault/**.md" },
+  event = { "BufReadPre  */Documents/vault/**.md" },
   dependencies = {
-    -- Required.
     "nvim-lua/plenary.nvim",
-    "nvim-telescope/telescope.nvim", -- picker
-    "nvim-treesitter", -- syntax highlighting
-    "hrsh7th/nvim-cmp", -- completion
-    -- see below for full list of optional dependencies 👇
+    "hrsh7th/nvim-cmp",
+    "nvim-telescope/telescope.nvim",
+    {
+      "AstroNvim/astrocore",
+      opts = {
+        mappings = {
+          n = {
+            ["gf"] = {
+              function()
+                if require("obsidian").util.cursor_on_markdown_link() then
+                  return "<Cmd>ObsidianFollowLink<CR>"
+                else
+                  return "gf"
+                end
+              end,
+              desc = "Obsidian Follow Link",
+            },
+          },
+        },
+      },
+    },
   },
   opts = {
-    workspaces = {
-      {
-        name = "vault",
-        path = "~/Documents/vault",
-      },
-      -- {
-      --   name = "work",
-      --   path = "~/vaults/work",
-      -- },
+    dir = vim.env.HOME .. "/Documents/vault", -- specify the vault location. no need to call 'vim.fn.expand' here
+    use_advanced_uri = true,
+    finder = "telescope.nvim",
+    conceallevel = 2,
+
+    templates = {
+      subdir = "Z_Meta/100_Templates/100_Templates",
+      date_format = "%Y-%m-%d-%a",
+      time_format = "%H:%M",
     },
 
-    -- see below for full list of options 👇
-    templates = {
-      subdir = "00 System/6 Templates",
-      date_format = "%Y-%m-%d",
-      time_format = "%H:%M",
-      -- A map for custom variables, the key should be the variable and the value a function
-      substitutions = {},
-    },
+    note_frontmatter_func = function(note)
+      -- This is equivalent to the default frontmatter function.
+      local out = { id = note.id, aliases = note.aliases, tags = note.tags }
+      -- `note.metadata` contains any manually added fields in the frontmatter.
+      -- So here we just make sure those fields are kept in the frontmatter.
+      if note.metadata ~= nil and require("obsidian").util.table_length(note.metadata) > 0 then
+        for k, v in pairs(note.metadata) do
+          out[k] = v
+        end
+      end
+      return out
+    end,
+
+    -- Optional, by default when you use `:ObsidianFollowLink` on a link to an external
+    -- URL it will be ignored but you can customize this behavior here.
+    follow_url_func = vim.ui.open or function(url) require("astrocore").system_open(url) end,
   },
 }
