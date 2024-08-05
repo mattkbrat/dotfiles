@@ -18,6 +18,12 @@ if [[ ! -r "$HOME/.apps/oh-my-posh" ]]; then
   curl -s https://ohmyposh.dev/install.sh | bash -s -- -d "$HOME/.apps"
 fi
 
+ZSH_COMPLETIONS_INIT="$HOME/.local/share/zsh-completions" 
+
+if [[ ! -r $ZSH_COMPLETIONS_INIT ]]; then
+  git clone --depth 1 https://github.com/zsh-users/zsh-completions.git $ZSH_COMPLETIONS_INIT 
+fi
+
 # If you're using macOS, you'll want this enabled
 # if [[ -f "/opt/homebrew/bin/brew" ]] then
 #   eval "$(/opt/homebrew/bin/brew shellenv)"
@@ -31,10 +37,12 @@ path+=$HOME/.local/share/pnpm/
 path+=$HOME/.apps/
 path+=$HOME/.local/bin 
 path+=$HOME/.scripts/
+fpath=("$ZSH_COMPLETIONS_INIT/src" $fpath)
 
 # Set the directory we want to store zinit and plugins
 export ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 export PNPM_HOME="$HOME/.local/share/pnpm"
+export ZSH_COMPLETIONS_HOME="$HOME/.local/share/zsh-completions" 
 
 # Download Zinit, if it's not there yet
 if [ ! -d "$ZINIT_HOME" ]; then
@@ -110,8 +118,9 @@ zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 # Aliases
 alias ls='ls --color'
 alias ll='ls -l --color'
-alias n ='lvim'
-alias vim='lvim'
+alias lvim='nvim'
+alias n ='nvim'
+alias vim='nvim'
 alias c='clear'
 alias q='exit'
 alias z='cd'
@@ -125,6 +134,7 @@ alias llm='eza --all --header --long --sort=modified $eza_params'
 alias la='eza -lbhHigUmuSa'
 alias lx='eza -lbhHigUmuSa@'
 alias lt='eza --tree $eza_params'
+alias rga='rg --no-hidden --no-ignore'
 alias tree='eza --tree $eza_params'
 
 
