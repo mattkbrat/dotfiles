@@ -44,6 +44,9 @@ export ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 export PNPM_HOME="$HOME/.local/share/pnpm"
 export ZSH_COMPLETIONS_HOME="$HOME/.local/share/zsh-completions" 
 
+# Other directories
+export NB_DIR="$HOME/Documents/nb"
+
 # Download Zinit, if it's not there yet
 if [ ! -d "$ZINIT_HOME" ]; then
    mkdir -p "$(dirname $ZINIT_HOME)"
@@ -153,3 +156,31 @@ esac
 # pnpm end
 
 source "$HOME/.profile"
+
+SSH_ENV=$HOME/.ssh/environment
+
+
+if [ -z "$SSH_KEY_HOME" ]
+then
+  echo "ssh home key not defined"
+fi
+
+# start the ssh-agent
+function start_agent {
+    echo "Initializing new SSH agent..."
+    # spawn ssh-agent
+    /usr/bin/ssh-agent | sed 's/^echo/#echo/' > ${SSH_ENV}
+    echo succeeded
+    chmod 600 ${SSH_ENV}
+    . ${SSH_ENV} > /dev/null
+    /usr/bin/ssh-add $SSH_KEY_HOME 
+}
+
+if [ -f "${SSH_ENV}" ]; then
+     . ${SSH_ENV} > /dev/null
+     ps -ef | grep ${SSH_AGENT_PID} | grep ssh-agent$ > /dev/null || {
+        start_agent;
+    }
+else
+    start_agent;
+fi
