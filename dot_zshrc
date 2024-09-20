@@ -37,6 +37,8 @@ path+=$HOME/.local/share/pnpm/
 path+=$HOME/.apps/
 path+=$HOME/.local/bin 
 path+=$HOME/.scripts/
+path+=$HOME/go/bin/
+path+=$HOME/go/pkg/
 fpath=("$ZSH_COMPLETIONS_INIT/src" $fpath)
 
 # Set the directory we want to store zinit and plugins
