@@ -140,9 +140,11 @@ alias llm='eza --all --header --long --sort=modified $eza_params'
 alias la='eza -lbhHigUmuSa'
 alias lx='eza -lbhHigUmuSa@'
 alias lt='eza --tree $eza_params'
-alias rga='rg --no-hidden --no-ignore'
 alias tree='eza --tree $eza_params'
 
+## Other
+alias lg='lazygit'
+alias rga='rg --no-hidden --no-ignore'
 
 # Shell integrations
 #eval "$(fzf --zsh)"
