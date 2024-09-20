@@ -145,6 +145,7 @@ alias tree='eza --tree $eza_params'
 ## Other
 alias lg='lazygit'
 alias rga='rg --no-hidden --no-ignore'
+alias dict="trans -en"
 
 # Shell integrations
 #eval "$(fzf --zsh)"
