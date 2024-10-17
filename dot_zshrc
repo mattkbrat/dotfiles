@@ -39,6 +39,7 @@ path+=$HOME/.local/bin
 path+=$HOME/.scripts/
 path+=$HOME/go/bin/
 path+=$HOME/go/pkg/
+path+=$HOME/minio-binaries
 path+=$HOME/.deno/bin
 
 fpath=("$ZSH_COMPLETIONS_INIT/src" $fpath)
