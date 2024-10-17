@@ -106,6 +106,8 @@ bindkey -e
 bindkey '^p' history-search-backward
 bindkey '^n' history-search-forward
 bindkey '^[w' kill-region
+## Add deno completions to search path
+if [[ ":$FPATH:" != *":/home/matt/.zsh/completions:"* ]]; then export FPATH="/home/matt/.zsh/completions:$FPATH"; fi
 
 # History
 HISTSIZE=5000
