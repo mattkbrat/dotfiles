@@ -67,7 +67,7 @@
       <property name="&lt;Super&gt;v" type="string" value="xfce4-clipman-history"/>
       <property name="&lt;Primary&gt;&lt;Shift&gt;space" type="string" value="rofi -i -show drun -modi drun -show-icons"/>
       <property name="&lt;Super&gt;l" type="string" value="xflock4"/>
-      <property name="&lt;Primary&gt;&lt;Alt&gt;t" type="string" value="kitty"/>
+      <property name="&lt;Primary&gt;&lt;Alt&gt;t" type="string" value="alacritty"/>
     </property>
   </property>
   <property name="xfwm4" type="empty">
@@ -126,8 +126,8 @@
       <property name="&lt;Primary&gt;F12" type="empty"/>
       <property name="&lt;Super&gt;KP_Left" type="empty"/>
       <property name="&lt;Super&gt;KP_Right" type="empty"/>
-      <property name="&lt;Super&gt;KP_Down" type="empty"/>
       <property name="&lt;Super&gt;KP_Up" type="empty"/>
+      <property name="&lt;Super&gt;KP_Down" type="empty"/>
       <property name="&lt;Super&gt;KP_Page_Up" type="empty"/>
       <property name="&lt;Super&gt;KP_Home" type="empty"/>
       <property name="&lt;Super&gt;KP_End" type="empty"/>
