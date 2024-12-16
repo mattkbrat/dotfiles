@@ -9,3 +9,5 @@
 node_modules
 dot_config/helix/themes/catpuccin/assets
 dot_config/helix/themes/catpuccin/dot_git
+dot_scripts/lazygit.tar.gz
+dot_scripts/executable_lazygit
