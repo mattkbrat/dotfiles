@@ -1,0 +1,12 @@
+return {
+  "neovim/nvim-lspconfig",
+  init = function()
+    local keys = require("lazyvim.plugins.lsp.keymaps").get()
+
+    -- disable `gr`, cause I want to use it for "Go Replace" (vim-scripts/ReplaceWithRegister)
+    keys[#keys + 1] = { "gr", false }
+
+    -- use gR for "Go to References"
+    keys[#keys + 1] = { "gR", ":Telescope lsp_references<cr>", desc = "[G]oto [R]eferences" }
+  end,
+}
