@@ -17,5 +17,8 @@ export ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 export PNPM_HOME="$HOME/.local/share/pnpm"
 export ZSH_COMPLETIONS_HOME="$HOME/.local/share/zsh-completions" 
 
+export PATH="$PNPM_HOME:$PATH"
+export PATH="$ZSH_COMPLETIONS_HOME:$PATH"
+
 # Deno Completions
 if [[ ":$FPATH:" != *":/home/matt/.zsh/completions:"* ]]; then export FPATH="/home/matt/.zsh/completions:$FPATH"; fi
