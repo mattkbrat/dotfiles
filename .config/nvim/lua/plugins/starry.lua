@@ -1,5 +1,6 @@
 local starry = {
   "ray-x/starry.nvim",
+  enabled = false,
   lazy = false,
   config = function()
     local starry = require("starry")
@@ -11,7 +12,6 @@ local starry = {
           },
         },
       })
-      vim.cmd("colorscheme oceanic")
     end
   end,
 }
