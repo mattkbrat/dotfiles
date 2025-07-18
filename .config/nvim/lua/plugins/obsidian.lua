@@ -3,42 +3,42 @@ return {
   -- the obsidian vault in this default config  ~/obsidian-vault
   -- If you want to use the home shortcut '~' here you need to call 'vim.fn.expand':
   -- event = { "bufreadpre " .. vim.fn.expand "~" .. "/my-vault/**.md" },
-  event = { "BufReadPre  */Documents/vault/**.md" },
+  event = { "BufReadPre  */Documents/vault-2/**.md" },
   dependencies = {
     "nvim-lua/plenary.nvim",
     "hrsh7th/nvim-cmp",
     "nvim-telescope/telescope.nvim",
-    {
-      "AstroNvim/astrocore",
-      opts = {
-        mappings = {
-          n = {
-            ["gf"] = {
-              function()
-                if require("obsidian").util.cursor_on_markdown_link() then
-                  return "<Cmd>ObsidianFollowLink<CR>"
-                else
-                  return "gf"
-                end
-              end,
-              desc = "Obsidian Follow Link",
-            },
-          },
-        },
-      },
-    },
+    -- {
+    --   "AstroNvim/astrocore",
+    --   opts = {
+    --     mappings = {
+    --       n = {
+    --         ["gf"] = {
+    --           function()
+    --             if require("obsidian").util.cursor_on_markdown_link() then
+    --               return "<Cmd>ObsidianFollowLink<CR>"
+    --             else
+    --               return "gf"
+    --             end
+    --           end,
+    --           desc = "Obsidian Follow Link",
+    --         },
+    --       },
+    --     },
+    --   },
+    -- },
   },
   opts = {
-    dir = vim.env.HOME .. "/Documents/vault", -- specify the vault location. no need to call 'vim.fn.expand' here
+    dir = vim.env.HOME .. "/Documents/vault-2", -- specify the vault location. no need to call 'vim.fn.expand' here
     use_advanced_uri = true,
     finder = "telescope.nvim",
     conceallevel = 2,
-
-    templates = {
-      subdir = "Z_Meta/100_Templates/100_Templates",
-      date_format = "%Y-%m-%d-%a",
-      time_format = "%H:%M",
-    },
+    ui = { enable = false },
+    -- templates = {
+    --   subdir = "Z_Meta/100_Templates/100_Templates",
+    --   date_format = "%Y-%m-%d-%a",
+    --   time_format = "%H:%M",
+    -- },
 
     note_frontmatter_func = function(note)
       -- This is equivalent to the default frontmatter function.
