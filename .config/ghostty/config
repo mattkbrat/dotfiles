@@ -35,6 +35,7 @@ font-family = "FiraCode"
 # background = #123abc
 background-opacity = 0.95
 background-blur-radius = 40 
+theme = dark:Catppuccin Frappe,light:rose-pine-dawn
 
 #
 # # Empty values are used to reset config keys to default.
